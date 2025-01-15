@@ -316,7 +316,7 @@ fun FormMahasiswa(
                 modifier = Modifier.fillMaxWidth(),
                 value = it,
                 onValueChange = {
-                    onValueChange(mahasiswaEvent.copy(dosenPembimbing1 = it))
+                    onValueChange(mahasiswaEvent.copy(dosenPembimbing2 = it))
                 },
                 label = { Text("Dosen Pembimbing 2") },
                 isError = errorState.dosenPembimbing2 != null,
