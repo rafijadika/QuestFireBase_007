@@ -90,34 +90,4 @@ class NetworkRepositoryMhs(
     }
 
 
-    override suspend fun deleteMhs(mahasiswa: Mahasiswa) {
-        try {
-            mahasiswa.nim?.let {
-                firestore.collection("Mahasiswa")
-                    .whereEqualTo("nim", mahasiswa.nim)
-                    .get()
-                    .await()
-                    .documents
-                    .firstOrNull()
-                    ?.reference
-                    ?.delete()
-                    ?.await()
-            }
-        } catch (e: Exception) {
-            throw Exception("Gagal menghapus data mahasiswa: ${e.message}")
-        }
-    }
-
-    override suspend fun updateMhs(mahasiswa: Mahasiswa) {
-        try {
-            mahasiswa.nim?.let {
-                firestore.collection("Mahasiswa") // Method untuk update mahasiswa
-                    .document(it)
-                    .set(mahasiswa)
-                    .await()
-            }
-        } catch (e: Exception) {
-            throw Exception("Gagal menghapus data mahasiswa: ${e.message}")
-        }
-    }
 }

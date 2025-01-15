@@ -63,7 +63,6 @@ fun HomeStatus(
     homeUiState: HomeUiState,
     retryAction: () -> Unit,
     modifier: Modifier = Modifier,
-    onDeleteClick: (Mahasiswa) -> Unit = {},
     onDetailClick: (String) -> Unit
 ) {
     var deleteConfirm by rememberSaveable { mutableStateOf<Mahasiswa?>(null) }
@@ -85,15 +84,7 @@ fun HomeStatus(
         )
     }
 
-    deleteConfirm?.let { data ->
-        DeleteConfirmationDialog(
-            onDeleteConfirm = {
-                onDeleteClick(data)
-                deleteConfirm = null
-            },
-            onDeleteCancel = { deleteConfirm = null }
-        )
-    }
+
 }
 
 @Composable
@@ -199,22 +190,3 @@ fun CardMhs(
     }
 }
 
-@Composable
-fun DeleteConfirmationDialog(
-    onDeleteConfirm: () -> Unit,
-    onDeleteCancel: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    AlertDialog(
-        onDismissRequest = { onDeleteCancel() },
-        title = { Text("Delete Data") },
-        text = { Text("Apakah anda yakin ingin menghapus data?") },
-        modifier = modifier,
-        dismissButton = {
-            TextButton(onClick = onDeleteCancel) { Text("Cancel") }
-        },
-        confirmButton = {
-            TextButton(onClick = onDeleteConfirm) { Text("Yes") }
-        }
-    )
-}
